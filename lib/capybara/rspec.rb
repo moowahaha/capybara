@@ -13,12 +13,12 @@ RSpec.configure do |config|
   # might not actually be used in all examples where it's included.
   config.after do
     if self.class.include?(Capybara::DSL)
-      Capybara.reset_sessions!
       Capybara.use_default_driver
     end
   end
   config.before do
     if self.class.include?(Capybara::DSL)
+      Capybara.reset_sessions! unless example.metadata[:maintain_session]
       Capybara.current_driver = Capybara.javascript_driver if example.metadata[:js]
       Capybara.current_driver = example.metadata[:driver] if example.metadata[:driver]
     end

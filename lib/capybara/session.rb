@@ -155,7 +155,7 @@ module Capybara
     # @param [String] url     The URL to navigate to
     #
     def visit(url)
-      driver.visit(url)
+      driver.visit(url) if url != current_path && url != current_url
     end
 
     ##
